@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * <p>
  * Created by dcibo on 5/24/2017.
  */
+@RestController
 public interface TrackingPixelApiController {
 
     /**
