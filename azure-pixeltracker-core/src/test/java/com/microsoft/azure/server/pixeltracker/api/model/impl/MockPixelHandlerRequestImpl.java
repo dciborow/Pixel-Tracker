@@ -1,4 +1,4 @@
-package com.microsoft.azure.server.pixeltracker.api.handlers;
+package com.microsoft.azure.server.pixeltracker.api.model.impl;
 
 import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
 import org.json.JSONObject;

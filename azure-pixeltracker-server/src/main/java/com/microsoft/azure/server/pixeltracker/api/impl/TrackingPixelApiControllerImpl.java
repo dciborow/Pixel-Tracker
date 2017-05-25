@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -52,8 +51,8 @@ public class TrackingPixelApiControllerImpl implements TrackingPixelApiControlle
         PixelHandlerRequestImpl pixelHandlerRequest = new PixelHandlerRequestImpl(request);
         this.handlers.forEach(t -> {
             try {
-                t.persist(pixelHandlerRequest);
-            } catch (UnsupportedEncodingException e) {
+                t.handle(pixelHandlerRequest);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

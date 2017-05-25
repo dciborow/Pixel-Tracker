@@ -14,16 +14,16 @@ import java.util.concurrent.Future;
  *
  * Created by dcibo on 5/25/2017.
  */
-public class EventHubTrackingPixelHandler implements TrackingPixelHandler {
+public class EventHubSendHandler implements TrackingPixelHandler {
 
     private final EventHubClient ehClient;
 
-    public EventHubTrackingPixelHandler(EventHubClient ehClient){
+    public EventHubSendHandler(EventHubClient ehClient){
         this.ehClient = ehClient;
     }
 
     @Override
-    public Future<Boolean> persist(PixelHandlerRequest request) throws UnsupportedEncodingException {
+    public Future<Boolean> handle(PixelHandlerRequest request) throws UnsupportedEncodingException {
         if (request.isSuccess()) {
             EventData eventData = new EventData(request.getJson().toString().getBytes("UTF-8"));
             this.ehClient.send(eventData);

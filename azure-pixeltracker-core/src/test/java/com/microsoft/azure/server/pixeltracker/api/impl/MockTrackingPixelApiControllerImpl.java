@@ -1,7 +1,7 @@
 package com.microsoft.azure.server.pixeltracker.api.impl;
 
 import com.microsoft.azure.server.pixeltracker.api.TrackingPixelApiController;
-import com.microsoft.azure.server.pixeltracker.api.handlers.MockPixelHandlerRequestImpl;
+import com.microsoft.azure.server.pixeltracker.api.model.impl.MockPixelHandlerRequestImpl;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class MockTrackingPixelApiControllerImpl implements TrackingPixelApiContr
         MockPixelHandlerRequestImpl mockPixelHandlerRequest = new MockPixelHandlerRequestImpl(request);
         this.handlers.forEach(t -> {
             try {
-                t.persist(mockPixelHandlerRequest);
+                t.handle(mockPixelHandlerRequest);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

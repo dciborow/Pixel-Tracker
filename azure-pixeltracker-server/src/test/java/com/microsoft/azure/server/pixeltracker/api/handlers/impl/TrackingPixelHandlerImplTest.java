@@ -15,11 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class TrackingPixelHandlerImplTest {
     @Test
-    void persist() throws Exception {
+    void handle() throws Exception {
         TestWebRequest testWebRequest = new TestWebRequest();
+        testWebRequest.setQueryString("test=1&test2=2");
         PixelHandlerRequestImpl pixelHandlerRequest = new PixelHandlerRequestImpl(testWebRequest);
-        Future<Boolean> persist = new TrackingPixelHandlerImpl().persist(pixelHandlerRequest);
-        assertTrue(persist.get());
+        Future<Boolean> handle = new JsonQueryStringHandler().handle(pixelHandlerRequest);
+        assertTrue(handle.get());
+        assertTrue(pixelHandlerRequest.getJson().has("test"));
+        assertTrue(pixelHandlerRequest.getJson().has("test2"));
+        assertTrue(pixelHandlerRequest.getJson().getString("test").equals("1"));
+        assertTrue(pixelHandlerRequest.getJson().getString("test2").equals("2"));
     }
 
 }

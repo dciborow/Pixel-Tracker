@@ -2,7 +2,7 @@ package com.microsoft.azure.server.pixeltracker.api.handlers;
 
 import com.microsoft.azure.server.pixeltracker.MockWebRequest;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.MockTrackingPixelHandlerImpl;
-import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
+import com.microsoft.azure.server.pixeltracker.api.model.impl.MockPixelHandlerRequestImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
@@ -20,7 +20,7 @@ class TrackingPixelHandlerTest {
         MockTrackingPixelHandlerImpl handler = new MockTrackingPixelHandlerImpl();
         MockWebRequest mockWebRequest = new MockWebRequest();
         MockPixelHandlerRequestImpl pixelHandlerRequest = new MockPixelHandlerRequestImpl(mockWebRequest);
-        Future<Boolean> persist = handler.persist(pixelHandlerRequest);
+        Future<Boolean> persist = handler.handle(pixelHandlerRequest);
         assertTrue(persist.get());
     }
 

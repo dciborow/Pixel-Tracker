@@ -11,5 +11,5 @@ import java.util.concurrent.Future;
  * Created by dcibo on 5/24/2017.
  */
 public interface TrackingPixelHandler {
-    Future<Boolean> persist(PixelHandlerRequest request) throws UnsupportedEncodingException;
+    Future<Boolean> handle(PixelHandlerRequest request) throws UnsupportedEncodingException;
 }

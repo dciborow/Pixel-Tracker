@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
 public class MockTrackingPixelHandlerImpl implements TrackingPixelHandler {
 
     @Override
-    public Future<Boolean> persist(PixelHandlerRequest request) {
+    public Future<Boolean> handle(PixelHandlerRequest request) {
         return new AsyncResult<>(request != null);
     }
 }

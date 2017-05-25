@@ -16,7 +16,7 @@ public class MockEventHubTrackingPixelHandler implements TrackingPixelHandler {
     }
 
     @Override
-    public Future<Boolean> persist(PixelHandlerRequest request) throws UnsupportedEncodingException {
+    public Future<Boolean> handle(PixelHandlerRequest request) throws UnsupportedEncodingException {
         return new AsyncResult<>(true);
     }
 }

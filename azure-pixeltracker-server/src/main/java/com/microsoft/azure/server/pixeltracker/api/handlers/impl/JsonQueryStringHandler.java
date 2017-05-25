@@ -14,12 +14,17 @@ import java.util.concurrent.Future;
  * Created by dcibo on 5/24/2017.
  */
 
-public class TrackingPixelHandlerImpl implements TrackingPixelHandler {
+public class JsonQueryStringHandler implements TrackingPixelHandler {
 
     @Override
-    public final Future<Boolean> persist(final PixelHandlerRequest request) {
+    public final Future<Boolean> handle(final PixelHandlerRequest request) {
         String queryString = request.getRequest().getQueryString();
-        System.out.println("queryString = " + queryString);
+        String[] split = queryString.split("&");
+        for (String s : split) {
+            String[] value = s.split("=");
+            if (value.length > 1)
+                request.getJson().put(value[0], value[1]);
+        }
         request.setSuccess(true);
         return new AsyncResult<>(request.isSuccess());
     }

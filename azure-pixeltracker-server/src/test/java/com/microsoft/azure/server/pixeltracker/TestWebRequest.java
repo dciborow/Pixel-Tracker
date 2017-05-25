@@ -19,6 +19,12 @@ import java.util.Map;
  * Created by dcibo on 5/25/2017.
  */
 public class TestWebRequest implements HttpServletRequest {
+    public void setQueryString(String queryString) {
+        this.queryString = queryString;
+    }
+
+    private String queryString;
+
     @Override
     public String getAuthType() {
         return null;
@@ -76,7 +82,7 @@ public class TestWebRequest implements HttpServletRequest {
 
     @Override
     public String getQueryString() {
-        return null;
+        return queryString;
     }
 
     @Override
