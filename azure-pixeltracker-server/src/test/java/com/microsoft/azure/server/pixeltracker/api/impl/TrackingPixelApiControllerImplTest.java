@@ -1,5 +1,6 @@
 package com.microsoft.azure.server.pixeltracker.api.impl;
 
+import com.microsoft.azure.server.pixeltracker.TestTrackingPixelConfigImpl;
 import com.microsoft.azure.server.pixeltracker.TestWebRequest;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
 import com.microsoft.azure.server.pixeltracker.impl.TrackingPixelConfigImpl;
@@ -19,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TrackingPixelApiControllerImplTest {
 
     @Test
-    void get() {
-        List<TrackingPixelHandler> handlers = new TrackingPixelConfigImpl().handlers();
+    void get() throws Exception {
+        List<TrackingPixelHandler> handlers = new TestTrackingPixelConfigImpl().handlers();
 
         ResponseEntity<byte[]> responseEntity = new TrackingPixelApiControllerImpl(handlers)
                 .get(new TestWebRequest());

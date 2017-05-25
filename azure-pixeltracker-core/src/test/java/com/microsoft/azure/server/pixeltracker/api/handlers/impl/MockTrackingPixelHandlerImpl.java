@@ -1,9 +1,9 @@
 package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
+import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
 import org.springframework.scheduling.annotation.AsyncResult;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.Future;
 
 /**
@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
 public class MockTrackingPixelHandlerImpl implements TrackingPixelHandler {
 
     @Override
-    public Future<Boolean> persist(HttpServletRequest request) {
+    public Future<Boolean> persist(PixelHandlerRequest request) {
         return new AsyncResult<>(request != null);
     }
 }

@@ -2,12 +2,14 @@ package com.microsoft.azure.server.pixeltracker.api.impl;
 
 import com.microsoft.azure.server.pixeltracker.api.TrackingPixelApiController;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
+import com.microsoft.azure.server.pixeltracker.api.model.impl.PixelHandlerRequestImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -47,7 +49,14 @@ public class TrackingPixelApiControllerImpl implements TrackingPixelApiControlle
      * @return async response of 1x1 pixel
      */
     public final ResponseEntity<byte[]> get(HttpServletRequest request) {
-        this.handlers.forEach(t -> t.persist(request));
+        PixelHandlerRequestImpl pixelHandlerRequest = new PixelHandlerRequestImpl(request);
+        this.handlers.forEach(t -> {
+            try {
+                t.persist(pixelHandlerRequest);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        });
         return new ResponseEntity<>(PIXEL, HttpStatus.ACCEPTED);
     }
 }

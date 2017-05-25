@@ -1,6 +1,8 @@
 package com.microsoft.azure.server.pixeltracker.api.handlers;
 
-import javax.servlet.http.HttpServletRequest;
+import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
+
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Future;
 
 /**
@@ -9,5 +11,5 @@ import java.util.concurrent.Future;
  * Created by dcibo on 5/24/2017.
  */
 public interface TrackingPixelHandler {
-    Future<Boolean> persist(HttpServletRequest request);
+    Future<Boolean> persist(PixelHandlerRequest request) throws UnsupportedEncodingException;
 }

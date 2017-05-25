@@ -1,5 +1,6 @@
 package com.microsoft.azure.server.pixeltracker.impl;
 
+import com.microsoft.azure.server.pixeltracker.TestTrackingPixelConfigImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,14 +19,12 @@ class TrackingPixelConfigImplTest {
 
     @BeforeAll
     static void setUp() {
-        context = new AnnotationConfigApplicationContext(TrackingPixelConfigImpl.class);
+        context = new AnnotationConfigApplicationContext(TestTrackingPixelConfigImpl.class);
     }
-
 
     @Test
     void handlers() {
         ArrayList handlers = context.getBean("handlers", ArrayList.class);
         assertNotNull(handlers);
     }
-
 }

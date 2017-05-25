@@ -1,5 +1,6 @@
 package com.microsoft.azure.server.pixeltracker;
 
+import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,5 +19,7 @@ public interface TrackingPixelConfig {
      *
      * @return list of handlers configured with Spring
      */
-    List<TrackingPixelHandler> handlers();
+    List<TrackingPixelHandler> handlers() throws Exception;
+
+    EventHubClient ehClient() throws Exception;
 }

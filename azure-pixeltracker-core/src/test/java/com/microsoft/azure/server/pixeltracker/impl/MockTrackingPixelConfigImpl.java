@@ -1,5 +1,6 @@
 package com.microsoft.azure.server.pixeltracker.impl;
 
+import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.server.pixeltracker.TrackingPixelConfig;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.MockTrackingPixelHandlerImpl;
@@ -25,5 +26,10 @@ public class MockTrackingPixelConfigImpl implements TrackingPixelConfig {
         List<TrackingPixelHandler> handlers = new ArrayList<>();
         handlers.add(new MockTrackingPixelHandlerImpl());
         return handlers;
+    }
+
+    @Override
+    public EventHubClient ehClient() throws Exception {
+        return null;
     }
 }

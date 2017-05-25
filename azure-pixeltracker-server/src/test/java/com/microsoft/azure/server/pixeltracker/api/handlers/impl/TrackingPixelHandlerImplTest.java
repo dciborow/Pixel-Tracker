@@ -1,6 +1,7 @@
 package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 
 import com.microsoft.azure.server.pixeltracker.TestWebRequest;
+import com.microsoft.azure.server.pixeltracker.api.model.impl.PixelHandlerRequestImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
@@ -16,7 +17,8 @@ class TrackingPixelHandlerImplTest {
     @Test
     void persist() throws Exception {
         TestWebRequest testWebRequest = new TestWebRequest();
-        Future<Boolean> persist = new TrackingPixelHandlerImpl().persist(testWebRequest);
+        PixelHandlerRequestImpl pixelHandlerRequest = new PixelHandlerRequestImpl(testWebRequest);
+        Future<Boolean> persist = new TrackingPixelHandlerImpl().persist(pixelHandlerRequest);
         assertTrue(persist.get());
     }
 
