@@ -15,6 +15,11 @@ import java.util.List;
  */
 public class MockTrackingPixelConfigImpl implements TrackingPixelConfig {
 
+    /**
+     * Configuration for Handles
+     *
+     * @return list of handlers configured
+     */
     @Bean
     public List<TrackingPixelHandler> handlers() {
         List<TrackingPixelHandler> handlers = new ArrayList<>();

@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Interface for Tracking Pixel API Controller
- * <p>
+ * Interface for Tracking Pixel API Controller.
+ *
  * This is used to ensure that future versions of the API remain consistent
- * <p>
- * <p>
+ *
  * Created by dcibo on 5/24/2017.
  */
 @RestController

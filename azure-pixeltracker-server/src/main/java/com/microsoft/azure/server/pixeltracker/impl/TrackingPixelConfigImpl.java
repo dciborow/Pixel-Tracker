@@ -15,8 +15,13 @@ import java.util.List;
  */
 public class TrackingPixelConfigImpl implements TrackingPixelConfig {
 
+    /**
+     * handlers bean configuration
+     *
+     * @return list of configured handlers
+     */
     @Bean
-    public List<TrackingPixelHandler> handlers() {
+    public final List<TrackingPixelHandler> handlers() {
         List<TrackingPixelHandler> handlers = new ArrayList<>();
         handlers.add(new TrackingPixelHandlerImpl());
         return handlers;

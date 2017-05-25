@@ -12,5 +12,11 @@ import java.util.List;
  */
 @Configuration
 public interface TrackingPixelConfig {
+
+    /**
+     * Interface for handlers configuration
+     *
+     * @return list of handlers configured with Spring
+     */
     List<TrackingPixelHandler> handlers();
 }

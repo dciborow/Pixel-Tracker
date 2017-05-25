@@ -20,17 +20,34 @@ import java.util.List;
 @RestController
 public class TrackingPixelApiControllerImpl implements TrackingPixelApiController {
 
-    private static final byte[] pixel = {Byte.parseByte("0")};
+    /**
+     * Pixel Constant used for output
+     */
+    private static final byte[] PIXEL = {Byte.parseByte("0")};
 
+    /**
+     * list of handlers executed by api
+     */
     private final List<TrackingPixelHandler> handlers;
 
+    /**
+     * Tracking Pixel Api Controller Impl
+     *
+     * @param handlers input list of handles wired with Spring
+     */
     @Autowired
     public TrackingPixelApiControllerImpl(List<TrackingPixelHandler> handlers) {
         this.handlers = handlers;
     }
 
-    public ResponseEntity<byte[]> get(HttpServletRequest request) {
+    /**
+     * Get Request
+     *
+     * @param request client web request
+     * @return async response of 1x1 pixel
+     */
+    public final ResponseEntity<byte[]> get(HttpServletRequest request) {
         this.handlers.forEach(t -> t.persist(request));
-        return new ResponseEntity<>(pixel, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(PIXEL, HttpStatus.ACCEPTED);
     }
 }

@@ -9,6 +9,8 @@ import java.util.concurrent.Future;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
+ * Tracking Pixel Handler Tests
+ *
  * Created by dcibo on 5/25/2017.
  */
 class TrackingPixelHandlerTest {

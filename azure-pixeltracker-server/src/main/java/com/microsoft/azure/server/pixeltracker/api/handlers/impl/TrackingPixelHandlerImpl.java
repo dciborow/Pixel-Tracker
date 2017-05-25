@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
 public class TrackingPixelHandlerImpl implements TrackingPixelHandler {
 
     @Override
-    public Future<Boolean> persist(HttpServletRequest request) {
+    public final Future<Boolean> persist(final HttpServletRequest request) {
         String queryString = request.getQueryString();
         System.out.println("queryString = " + queryString);
         return new AsyncResult<>(true);
