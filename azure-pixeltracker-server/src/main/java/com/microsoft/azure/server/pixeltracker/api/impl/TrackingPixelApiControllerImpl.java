@@ -6,10 +6,11 @@ import com.microsoft.azure.server.pixeltracker.api.model.impl.PixelHandlerReques
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Tracking Pixel API Controller Implementation
@@ -18,7 +19,8 @@ import java.util.List;
  * <p>
  * Created by dcibo on 5/24/2017.
  */
-@RestController
+@Controller
+@RequestMapping("pixel.gif")
 public class TrackingPixelApiControllerImpl implements TrackingPixelApiController {
 
     /**
@@ -29,7 +31,7 @@ public class TrackingPixelApiControllerImpl implements TrackingPixelApiControlle
     /**
      * list of handlers executed by api
      */
-    private final List<TrackingPixelHandler> handlers;
+    private final TrackingPixelHandler handlers;
 
     /**
      * Tracking Pixel Api Controller Impl
@@ -37,7 +39,7 @@ public class TrackingPixelApiControllerImpl implements TrackingPixelApiControlle
      * @param handlers input list of handles wired with Spring
      */
     @Autowired
-    public TrackingPixelApiControllerImpl(List<TrackingPixelHandler> handlers) {
+    public TrackingPixelApiControllerImpl(TrackingPixelHandler handlers) {
         this.handlers = handlers;
     }
 
@@ -47,15 +49,13 @@ public class TrackingPixelApiControllerImpl implements TrackingPixelApiControlle
      * @param request client web request
      * @return async response of 1x1 pixel
      */
+    @RequestMapping("pixel.gif")
     public final ResponseEntity<byte[]> get(HttpServletRequest request) {
-        PixelHandlerRequestImpl pixelHandlerRequest = new PixelHandlerRequestImpl(request);
-        this.handlers.forEach(t -> {
-            try {
-                t.handle(pixelHandlerRequest);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        try {
+            this.handlers.handle(new PixelHandlerRequestImpl(request));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity<>(PIXEL, HttpStatus.ACCEPTED);
     }
 }

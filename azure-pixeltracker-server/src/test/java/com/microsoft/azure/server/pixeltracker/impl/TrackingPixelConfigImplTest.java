@@ -2,12 +2,12 @@ package com.microsoft.azure.server.pixeltracker.impl;
 
 import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.server.pixeltracker.TestTrackingPixelConfigImpl;
+import com.microsoft.azure.server.pixeltracker.api.handlers.HandlerList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.ArrayList;
+import org.springframework.context.annotation.Configuration;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * <p>
  * Created by dcibo on 5/25/2017.
  */
+@Configuration
 class TrackingPixelConfigImplTest {
 
     private static AnnotationConfigApplicationContext context;
@@ -28,7 +29,7 @@ class TrackingPixelConfigImplTest {
 
     @Test
     void handlers() {
-        ArrayList handlers = context.getBean("handlers", ArrayList.class);
+        HandlerList handlers = context.getBean("handlers", HandlerList.class);
         assertNotNull(handlers);
     }
 

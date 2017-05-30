@@ -2,13 +2,10 @@ package com.microsoft.azure.server.pixeltracker.api.impl;
 
 import com.microsoft.azure.server.pixeltracker.TestTrackingPixelConfigImpl;
 import com.microsoft.azure.server.pixeltracker.TestWebRequest;
-import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
-import com.microsoft.azure.server.pixeltracker.impl.TrackingPixelConfigImpl;
+import com.microsoft.azure.server.pixeltracker.api.handlers.HandlerList;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,10 +18,11 @@ class TrackingPixelApiControllerImplTest {
 
     @Test
     void get() throws Exception {
-        List<TrackingPixelHandler> handlers = new TestTrackingPixelConfigImpl().handlers();
-
+        HandlerList handlers = new TestTrackingPixelConfigImpl().handlers();
+        TestWebRequest testWebRequest = new TestWebRequest();
+        testWebRequest.setQueryString("test1=1&test2=2");
         ResponseEntity<byte[]> responseEntity = new TrackingPixelApiControllerImpl(handlers)
-                .get(new TestWebRequest());
+                .get(testWebRequest);
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.ACCEPTED);
     }

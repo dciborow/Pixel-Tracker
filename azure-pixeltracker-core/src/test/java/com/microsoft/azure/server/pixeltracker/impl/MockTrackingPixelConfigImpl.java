@@ -6,9 +6,6 @@ import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.MockTrackingPixelHandlerImpl;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Mock Tracking Pixel Api Config for testing
  * <p>
@@ -22,10 +19,8 @@ public class MockTrackingPixelConfigImpl implements TrackingPixelConfig {
      * @return list of handlers configured
      */
     @Bean
-    public List<TrackingPixelHandler> handlers() {
-        List<TrackingPixelHandler> handlers = new ArrayList<>();
-        handlers.add(new MockTrackingPixelHandlerImpl());
-        return handlers;
+    public TrackingPixelHandler handlers() {
+        return new MockTrackingPixelHandlerImpl();
     }
 
     @Override

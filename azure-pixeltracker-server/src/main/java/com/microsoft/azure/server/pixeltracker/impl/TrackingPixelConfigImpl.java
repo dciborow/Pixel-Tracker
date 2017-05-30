@@ -5,47 +5,79 @@ import com.microsoft.azure.server.pixeltracker.TrackingPixelConfig;
 import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.EventHubSendHandler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.JsonQueryStringHandler;
+import com.microsoft.azure.server.pixeltracker.api.impl.TrackingPixelApiControllerImpl;
 import com.microsoft.azure.servicebus.ConnectionStringBuilder;
+import com.microsoft.azure.servicebus.ServiceBusException;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.IOException;
 
 /**
  * Spring Configuration for Tracking Pixel Server
  * <p>
  * Created by dcibo on 5/25/2017.
  */
+@ComponentScan(basePackageClasses = {TrackingPixelApiControllerImpl.class})
 @Configuration
 @EnableWebMvc
 public class TrackingPixelConfigImpl implements TrackingPixelConfig {
-    private final String namespaceName = "----ServiceBusNamespaceName-----";
-    private final String eventHubName = "----EventHubName-----";
-    private final String sasKeyName = "-----SharedAccessSignatureKeyName-----";
-    private final String sasKey = "---SharedAccessSignatureKey----";
+
+    @Bean
+    public String namespaceName() {
+        return System.getenv("ServiceBusNamespaceName");
+    }
+
+    @Bean
+    public String eventHubName() {
+        return System.getenv("EventHubName");
+    }
+
+    @Bean
+    public String sasKeyName() {
+        return System.getenv("SharedAccessSignatureKeyName");
+    }
+
+    @Bean
+    public String sasKey() {
+        return System.getenv("SharedAccessSignatureKey");
+    }
 
     /**
      * handlers bean configuration
+     * <p>
+     * First, convert from query string to json.
+     * Last, send async to event hub.
      *
      * @return list of configured handlers
      */
     @Bean
-    public List<TrackingPixelHandler> handlers() throws Exception {
-        return Stream.of(
-                new JsonQueryStringHandler(),
-                new EventHubSendHandler(ehClient())
-        ).collect(Collectors.toList());
+    public com.microsoft.azure.server.pixeltracker.api.handlers.impl.MockTrackingPixelHandlerImpl handlers() throws Exception {
+        return jsonQueryStringHandler();
+    }
+
+    @Bean
+    public TrackingPixelHandler jsonQueryStringHandler() {
+        return new JsonQueryStringHandler(eventHubSendHandler());
+    }
+
+    @Bean
+    public TrackingPixelHandler eventHubSendHandler() {
+        return new EventHubSendHandler(ehClient());
     }
 
     @Bean
 //    @Scope("singleton")
-    public EventHubClient ehClient() throws Exception {
-        ConnectionStringBuilder connStr = new ConnectionStringBuilder(namespaceName, eventHubName, sasKeyName, sasKey);
-        return EventHubClient.createFromConnectionStringSync(connStr.toString());
+    public EventHubClient ehClient() {
+        ConnectionStringBuilder connStr = new ConnectionStringBuilder(namespaceName(), eventHubName(), sasKeyName(), sasKey());
+        try {
+            return EventHubClient.createFromConnectionStringSync(connStr.toString());
+        } catch (ServiceBusException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 //        return EventHubClient.createFromConnectionStringSync(System.getenv("eh_connnection_string"));
     }
 }

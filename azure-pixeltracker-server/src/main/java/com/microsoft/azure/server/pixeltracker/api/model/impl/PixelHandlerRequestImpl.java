@@ -4,6 +4,7 @@ import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Pixel Handler Request Model Impl
@@ -25,6 +26,21 @@ public class PixelHandlerRequestImpl implements PixelHandlerRequest {
     public PixelHandlerRequest setSuccess(boolean success) {
         this.success = success;
         return this;
+    }
+
+    @Override
+    public String getQueryString() {
+        return getRequest().getQueryString();
+    }
+
+    @Override
+    public void put(String key, String value) {
+        getJson().put(key, value);
+    }
+
+    @Override
+    public byte[] getBytes(String encoding) throws UnsupportedEncodingException {
+        return getJson().toString().getBytes(encoding);
     }
 
     public PixelHandlerRequestImpl(HttpServletRequest request){

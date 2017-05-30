@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
  * Created by dcibo on 5/25/2017.
  */
 public class MockPixelHandlerRequestImpl implements PixelHandlerRequest {
+    private HttpServletRequest mockWebRequest;
+
     public MockPixelHandlerRequestImpl(HttpServletRequest mockWebRequest) {
+        this.mockWebRequest = mockWebRequest;
     }
 
     @Override
@@ -30,5 +33,10 @@ public class MockPixelHandlerRequestImpl implements PixelHandlerRequest {
     @Override
     public PixelHandlerRequest setSuccess(boolean success) {
         return null;
+    }
+
+    @Override
+    public String getQueryString() {
+        return this.mockWebRequest.getQueryString();
     }
 }

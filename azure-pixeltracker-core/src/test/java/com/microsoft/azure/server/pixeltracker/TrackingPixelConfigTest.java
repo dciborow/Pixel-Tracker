@@ -1,10 +1,8 @@
 package com.microsoft.azure.server.pixeltracker;
 
-import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
+import com.microsoft.azure.server.pixeltracker.api.handlers.impl.JsonQueryStringHandler;
 import com.microsoft.azure.server.pixeltracker.impl.MockTrackingPixelConfigImpl;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,7 +15,7 @@ class TrackingPixelConfigTest {
     @Test
     void handlers() {
         MockTrackingPixelConfigImpl mockTrackingPixelConfig = new MockTrackingPixelConfigImpl();
-        List<TrackingPixelHandler> handlers = mockTrackingPixelConfig.handlers();
+        JsonQueryStringHandler handlers = mockTrackingPixelConfig.handlers();
         assertNotNull(handlers);
     }
 
