@@ -32,13 +32,4 @@ public class PixelControllerTest {
                 .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
 
     }
-
-    @Test
-    public void index2() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError())
-                .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
-
-    }
-
 }
