@@ -1,6 +1,5 @@
 package com.microsoft.azure.server.pixeltracker.api;
 
-import com.microsoft.azure.server.pixeltracker.api.Pixel;
 import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
 import com.microsoft.azure.server.pixeltracker.api.model.PixelTrackerRequestImpl;
 
