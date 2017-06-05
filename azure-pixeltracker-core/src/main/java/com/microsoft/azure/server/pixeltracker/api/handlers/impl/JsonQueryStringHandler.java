@@ -1,11 +1,9 @@
 package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 
-import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
-import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
+import com.microsoft.azure.server.pixeltracker.api.model.PixelTrackerRequest;
+import org.springframework.web.context.request.RequestContextHolder;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.concurrent.Future;
 
 /**
  * Tracking Pixel Handler Impl
@@ -15,17 +13,11 @@ import java.util.concurrent.Future;
  * Created by dcibo on 5/24/2017.
  */
 
-public class JsonQueryStringHandler implements TrackingPixelHandler {
-
-    private TrackingPixelHandler childHandler;
-
-    public JsonQueryStringHandler(TrackingPixelHandler childHandler) {
-        assert childHandler != null : "Child handler not expected to be null.";
-        this.childHandler = childHandler;
-    }
+public class JsonQueryStringHandler extends TrackingPixelHandler {
 
     @Override
-    public final Future<Boolean> handle(final PixelHandlerRequest request) throws UnsupportedEncodingException {
+    public void strategy(PixelTrackerRequest request) throws Exception {
+
         String queryString = request.getQueryString();
         if (queryString.length() <= 0) request.setSuccess(false);
         else {
@@ -36,6 +28,5 @@ public class JsonQueryStringHandler implements TrackingPixelHandler {
                     });
             request.setSuccess(true);
         }
-        return this.childHandler.handle(request);
     }
 }

@@ -8,6 +8,7 @@
     <modules>
         <module>azure-pixeltracker-core</module>
         <module>azure-pixeltracker-server</module>
+        <module>cortana-pixeltracker-server</module>
     </modules>
     <artifactId>azure-pixeltracker-parent</artifactId>
     <packaging>pom</packaging>
@@ -35,8 +36,8 @@
         <legal>
             <![CDATA[[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.]]></legal>
         <testMode>playback</testMode>
-        <junit5>5.0.0-M3</junit5>
-        <junit5Plugin>1.0.0-M3</junit5Plugin>
+        <junit5>5.0.0-M4</junit5>
+        <junit5Plugin>1.0.0-M4</junit5Plugin>
     </properties>
 
     <developers>

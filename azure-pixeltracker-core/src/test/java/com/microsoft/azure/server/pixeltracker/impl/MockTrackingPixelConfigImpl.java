@@ -2,7 +2,7 @@ package com.microsoft.azure.server.pixeltracker.impl;
 
 import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.server.pixeltracker.TrackingPixelConfig;
-import com.microsoft.azure.server.pixeltracker.api.handlers.TrackingPixelHandler;
+import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.MockTrackingPixelHandlerImpl;
 import org.springframework.context.annotation.Bean;
 
@@ -19,7 +19,7 @@ public class MockTrackingPixelConfigImpl implements TrackingPixelConfig {
      * @return list of handlers configured
      */
     @Bean
-    public TrackingPixelHandler handlers() {
+    public Handler handlers() {
         return new MockTrackingPixelHandlerImpl();
     }
 
