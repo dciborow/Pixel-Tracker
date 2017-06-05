@@ -1,9 +1,7 @@
 package com.microsoft.azure.server.pixeltracker.api.model;
 
-import com.microsoft.azure.server.pixeltracker.api.model.PixelHandlerRequest;
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -12,13 +10,13 @@ import java.util.Map;
  *
  * Created by dcibo on 5/25/2017.
  */
-public class PixelHandlerRequestImpl implements PixelHandlerRequest {
+public class PixelTrackerRequestImpl implements PixelTrackerRequest {
 
     private final JSONObject json = new JSONObject();
     private boolean success = true;
     private Map<String, String> queryParameters;
 
-    public PixelHandlerRequestImpl(Map<String, String> queryParameters) {
+    public PixelTrackerRequestImpl(Map<String, String> queryParameters) {
         this.queryParameters = queryParameters;
     }
 
@@ -28,7 +26,7 @@ public class PixelHandlerRequestImpl implements PixelHandlerRequest {
     }
 
     @Override
-    public PixelHandlerRequest setSuccess(boolean success) {
+    public PixelTrackerRequest setSuccess(boolean success) {
         this.success = success;
         return this;
     }

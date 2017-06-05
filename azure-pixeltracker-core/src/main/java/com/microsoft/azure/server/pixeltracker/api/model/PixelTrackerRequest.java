@@ -2,7 +2,6 @@ package com.microsoft.azure.server.pixeltracker.api.model;
 
 import org.json.JSONObject;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -10,11 +9,11 @@ import java.io.UnsupportedEncodingException;
  *
  * Created by dcibo on 5/25/2017.
  */
-public interface PixelHandlerRequest {
+public interface PixelTrackerRequest {
     JSONObject getJson();
 
     boolean isSuccess();
-    PixelHandlerRequest setSuccess(boolean success);
+    PixelTrackerRequest setSuccess(boolean success);
 
     String getQueryString();
 
