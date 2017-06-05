@@ -52,11 +52,6 @@
             <artifactId>azure-pixeltracker-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-pixeltracker-server</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
     <properties>
         <java.version>1.8</java.version>
