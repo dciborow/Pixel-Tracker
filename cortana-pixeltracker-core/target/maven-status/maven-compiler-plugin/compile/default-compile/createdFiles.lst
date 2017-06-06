@@ -1,10 +1,17 @@
 com\microsoft\azure\server\pixeltracker\api\handlers\Handler.class
 com\microsoft\azure\server\pixeltracker\api\handlers\impl\AbstractHandler.class
 com\microsoft\azure\server\pixeltracker\api\handlers\impl\EventHubSendHandler.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration$EventHubPropertyCondition$EventHubName.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration$EventHubPropertyCondition$EventHubServiceBusNamespaceName.class
 com\microsoft\azure\server\pixeltracker\TrackingPixelConfig.class
 com\microsoft\azure\server\pixeltracker\api\model\Request.class
 META-INF\spring-configuration-metadata.json
 com\microsoft\azure\server\pixeltracker\api\Pixel.class
+com\microsoft\azure\eventhubs\spring\EventHubTemplate.class
 com\microsoft\azure\server\pixeltracker\api\model\RequestImpl.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration$EventHubPropertyCondition.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration$EventHubPropertyCondition$EventHubSharedAccessSignatureKeyName.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration$EventHubPropertyCondition$EventHubSharedAccessSignatureKey.class
 com\microsoft\azure\server\pixeltracker\api\AbstractPixel.class
 com\microsoft\azure\server\pixeltracker\api\handlers\impl\JsonQueryStringHandler.class
+com\microsoft\azure\eventhubs\spring\EventHubAutoConfiguration.class
