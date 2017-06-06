@@ -1,0 +1,4 @@
+com\microsoft\azure\pixeltracker\server\Index.class
+com\microsoft\azure\pixeltracker\server\api\PixelController.class
+com\microsoft\azure\pixeltracker\server\Application.class
+com\microsoft\azure\pixeltracker\server\IndexController.class

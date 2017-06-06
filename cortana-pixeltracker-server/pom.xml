@@ -10,7 +10,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.microsoft.azure</groupId>
     <artifactId>cortana-pixeltracker-server</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -42,6 +41,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>1.5.3.RELEASE</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>com.github.sbrannen</groupId>
             <artifactId>spring-test-junit5</artifactId>
             <version>RELEASE</version>
@@ -49,8 +54,18 @@
         </dependency>
         <dependency>
             <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-pixeltracker-core</artifactId>
+            <artifactId>cortana-pixeltracker-core</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.10.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>1.5.3.RELEASE</version>
         </dependency>
     </dependencies>
     <properties>

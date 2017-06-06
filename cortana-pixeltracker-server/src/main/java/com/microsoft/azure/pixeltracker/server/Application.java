@@ -1,16 +1,14 @@
 package com.microsoft.azure.pixeltracker.server;
 
-import com.microsoft.azure.eventhubs.EventHubClient;
+import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
+import com.microsoft.azure.eventhubs.spring.EventHubTemplate;
 import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.EventHubSendHandler;
 import com.microsoft.azure.server.pixeltracker.api.handlers.impl.JsonQueryStringHandler;
-import com.microsoft.azure.servicebus.ConnectionStringBuilder;
-import com.microsoft.azure.servicebus.ServiceBusException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
 
 /**
  * Created by dcibo on 6/2/2017.
@@ -32,52 +30,33 @@ public class Application {
      * @return list of configured handlers
      */
     @Bean
-    public Handler handlers() throws Exception {
-        return jsonQueryStringHandler()
-                .setNextOperation(eventHubSendHandler());
+    Handler handlers(EventHubAutoConfiguration ehConfig) throws Exception {
+        return jsonQueryStringHandler
+                .setNextOperation(eventHubSendHandler(ehConfig));
+    }
+
+    private final JsonQueryStringHandler jsonQueryStringHandler = new JsonQueryStringHandler();
+
+    @Bean
+    Handler eventHubSendHandler(EventHubAutoConfiguration ehConfig) {
+        return new EventHubSendHandler(ehConfig);
     }
 
     @Bean
-    public String namespaceName() {
-        return System.getenv("ServiceBusNamespaceName");
+    EventHubAutoConfiguration eventHubAutoConfiguration(EventHubTemplate ehTemplate) {
+        return new EventHubAutoConfiguration(ehTemplate);
     }
 
     @Bean
-    public String eventHubName() {
-        return System.getenv("EventHubName");
+    EventHubTemplate eventHubClientProperties(
+            @Value(value = "#{environment.ServiceBusNamespaceName}") String serviceBusNamespaceName,
+            @Value("#{environment.EventHubName}") String eventHubName,
+            @Value("#{environment.sharedAccessSignatureKeyName}") String sharedAccessSignatureKeyName,
+            @Value("#{environment.SharedAccessSignatureKey}") String sharedAccessSignatureKey) {
+        return new EventHubTemplate()
+                .setEventHubName(eventHubName)
+                .setServiceBusNamespaceName(serviceBusNamespaceName)
+                .setSharedAccessSignatureKey(sharedAccessSignatureKeyName)
+                .setSharedAccessSignatureKey(sharedAccessSignatureKey);
     }
-
-    @Bean
-    public String sasKeyName() {
-        return System.getenv("SharedAccessSignatureKeyName");
-    }
-
-    @Bean
-    public String sasKey() {
-        return System.getenv("SharedAccessSignatureKey");
-    }
-
-    @Bean
-    public Handler jsonQueryStringHandler() {
-        return new JsonQueryStringHandler();
-    }
-
-    @Bean
-    public Handler eventHubSendHandler() {
-        return new EventHubSendHandler(ehClient());
-    }
-
-    @Bean
-//    @Scope("singleton")
-    public EventHubClient ehClient() {
-        ConnectionStringBuilder connStr = new ConnectionStringBuilder(namespaceName(), eventHubName(), sasKeyName(), sasKey());
-        try {
-            return EventHubClient.createFromConnectionStringSync(connStr.toString());
-        } catch (ServiceBusException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-//        return EventHubClient.createFromConnectionStringSync(System.getenv("eh_connnection_string"));
-    }
-
 }

@@ -1,0 +1,32 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.microsoft.azure.eventhubs.spring.EventHubTemplate",
+      "name": "azure.eventhub",
+      "type": "com.microsoft.azure.eventhubs.spring.EventHubTemplate"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.microsoft.azure.eventhubs.spring.EventHubTemplate",
+      "name": "azure.eventhub.event-hub-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.microsoft.azure.eventhubs.spring.EventHubTemplate",
+      "name": "azure.eventhub.service-bus-namespace-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.microsoft.azure.eventhubs.spring.EventHubTemplate",
+      "name": "azure.eventhub.shared-access-signature-key",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.microsoft.azure.eventhubs.spring.EventHubTemplate",
+      "name": "azure.eventhub.shared-access-signature-key-name",
+      "type": "java.lang.String"
+    }
+  ]
+}
