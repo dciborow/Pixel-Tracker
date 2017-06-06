@@ -9,19 +9,12 @@
 - [Setup Steps](#setup-steps)
    - [General](#setup-steps)
    - [Azure Storage](#storage)
-   - [Azure SQL Data Warehouse](#dw)
-   - [Azure Machine Learning](#aml)
    - [Azure Event Hubs](#eventhub)
    - [Azure Stream Analytics](#asa)
    - [Azure Web App](#webapp)
-   - [Azure Data Factory](#adf)
 - [PowerBI Dashboard](#powerbi-dashboard)
    - [Local setup](#pbilocal)
    - [Publishing](#pbipublish)
-- [Retrain the Predictive Model Manually](#retrainmanually)
-- [Retrain the Predictive Model with ADF](#retrain)
-   - [Azure Machine Learning](#amlupdates)
-   - [Azure Data Factory](#adfmodifications)
 
 ## Introduction
 
