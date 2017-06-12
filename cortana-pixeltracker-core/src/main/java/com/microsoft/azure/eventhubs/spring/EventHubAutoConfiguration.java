@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.eventhubs.spring;
 
 import com.microsoft.azure.eventhubs.EventHubClient;
@@ -15,9 +19,6 @@ import org.springframework.context.annotation.ConfigurationCondition;
 
 import java.io.IOException;
 
-/**
- * Created by dcibo on 6/5/2017.
- */
 @Configuration
 @ConditionalOnClass({com.microsoft.azure.eventhubs.EventHubClient.class})
 @Conditional({EventHubAutoConfiguration.EventHubPropertyCondition.class})

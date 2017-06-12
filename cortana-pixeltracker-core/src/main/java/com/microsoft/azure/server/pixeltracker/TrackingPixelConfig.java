@@ -1,14 +1,13 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker;
 
 import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Tracking Pixel Spring Configuration Interface
- * <p>
- * Created by dcibo on 5/25/2017.
- */
 @Configuration
 public interface TrackingPixelConfig {
 

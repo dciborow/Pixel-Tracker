@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 
 import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
@@ -6,9 +10,6 @@ import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.util.concurrent.Future;
 
-/**
- * Created by dcibo on 6/2/2017.
- */
 public abstract class AbstractHandler implements Handler {
     private Handler childHandler = null;
 

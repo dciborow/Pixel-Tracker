@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker.api;
 
 import org.springframework.http.MediaType;
@@ -7,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
-/**
- * Created by dcibo on 6/2/2017.
- */
 public interface Pixel {
 
     @RequestMapping(value = "/pixel",

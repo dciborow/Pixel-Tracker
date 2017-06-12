@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker.api.model;
 
 import org.json.JSONException;
@@ -6,11 +10,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-/**
- * Pixel Handler Request Model Impl
- *
- * Created by dcibo on 5/25/2017.
- */
 public class RequestImpl implements Request {
 
     private final JSONObject json = new JSONObject();
