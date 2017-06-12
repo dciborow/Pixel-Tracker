@@ -7,10 +7,19 @@ package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 import com.microsoft.azure.eventhubs.EventData;
 import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
 import com.microsoft.azure.server.pixeltracker.api.model.Request;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.CompletableFuture;
 
 public class EventHubSendHandler extends AbstractHandler {
+    private static Logger logger = LogManager.getLogger();
 
-    private final EventHubAutoConfiguration ehClient;
+    @Autowired
+    private EventHubAutoConfiguration ehClient;
+    private final String ENCODING = "UTF-8";
 
     public EventHubSendHandler(EventHubAutoConfiguration ehClient) {
         assert ehClient != null;
@@ -19,9 +28,16 @@ public class EventHubSendHandler extends AbstractHandler {
 
     @Override
     public void strategy(Request request) throws Exception {
-        if (request.isSuccess())
-            this.ehClient.eventHubClient().send(new EventData(request.getBytes("UTF-8")));
+        logger.trace("Event hub Send Strategy");
+        if (request.isSuccess()) sendWithEventHubClient(request);
+    }
 
+    private CompletableFuture<Void> sendWithEventHubClient(Request request) throws UnsupportedEncodingException {
+        return this.ehClient.eventHubClient().send(eventDataFrom(request));
+    }
+
+    private EventData eventDataFrom(Request request) throws UnsupportedEncodingException {
+        return new EventData(request.getBytes(ENCODING));
     }
 
 }

@@ -15,6 +15,16 @@ public abstract class AbstractHandler implements Handler {
 
     @Override
     public Handler setNextOperation(Handler childHandler) {
+        return setChildHandler(childHandler);
+    }
+
+    @Override
+    public Future<Boolean> handle(Request request) throws Exception {
+        strategy(request);
+        return chainHandler(request);
+    }
+
+    private Handler setChildHandler(Handler childHandler) {
         if (this.childHandler == null)
             this.childHandler = childHandler;
         else
@@ -22,10 +32,9 @@ public abstract class AbstractHandler implements Handler {
         return this;
     }
 
-    @Override
-    public Future<Boolean> handle(Request request) throws Exception {
-        strategy(request);
-        return childHandler != null ?
-                this.childHandler.handle(request) : new AsyncResult<>(request.isSuccess());
+    private Future<Boolean> chainHandler(Request request) throws Exception {
+        return childHandler == null
+                ? new AsyncResult<>(request.isSuccess())
+                : this.childHandler.handle(request);
     }
 }

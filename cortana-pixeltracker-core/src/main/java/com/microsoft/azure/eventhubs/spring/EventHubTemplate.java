@@ -20,11 +20,11 @@ public class EventHubTemplate {
                             String serviceBusNamespaceName,
                             String sharedAccessSignatureKeyName,
                             String sharedAccessSignatureKey) throws Exception {
-        if (eventHubName.isEmpty()
-                || serviceBusNamespaceName.isEmpty()
-                || sharedAccessSignatureKeyName.isEmpty()
-                || sharedAccessSignatureKey.isEmpty())
-            throw new Exception("Event Hub Parameters not properly set. Check Configuration");
+        assert !(eventHubName == null || eventHubName.isEmpty()
+                || serviceBusNamespaceName == null || serviceBusNamespaceName.isEmpty()
+                || sharedAccessSignatureKeyName == null || sharedAccessSignatureKeyName.isEmpty()
+                || sharedAccessSignatureKey == null || sharedAccessSignatureKey.isEmpty())
+                : "Event Hub Parameters not properly set. Check Configuration";
 
         this.eventHubName = eventHubName;
         this.serviceBusNamespaceName = serviceBusNamespaceName;

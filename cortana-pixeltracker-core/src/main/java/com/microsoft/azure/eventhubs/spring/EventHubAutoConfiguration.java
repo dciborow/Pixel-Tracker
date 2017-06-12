@@ -7,6 +7,8 @@ package com.microsoft.azure.eventhubs.spring;
 import com.microsoft.azure.eventhubs.EventHubClient;
 import com.microsoft.azure.servicebus.ConnectionStringBuilder;
 import com.microsoft.azure.servicebus.ServiceBusException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,8 +26,9 @@ import java.io.IOException;
 @Conditional({EventHubAutoConfiguration.EventHubPropertyCondition.class})
 @EnableConfigurationProperties({EventHubTemplate.class})
 public class EventHubAutoConfiguration {
-
+    private static Logger logger = LogManager.getLogger();
     private final EventHubTemplate eventHubTemplate;
+    private EventHubClient ehClient;
 
     public EventHubAutoConfiguration(EventHubTemplate eventHubTemplate) {
         this.eventHubTemplate = eventHubTemplate;
@@ -34,17 +37,19 @@ public class EventHubAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean({EventHubClient.class})
     public EventHubClient eventHubClient() {
-        ConnectionStringBuilder connStr = new ConnectionStringBuilder(
-                eventHubTemplate.getServiceBusNamespaceName(),
-                eventHubTemplate.getEventHubName(),
-                eventHubTemplate.getSharedAccessSignatureKeyName(),
-                eventHubTemplate.getSharedAccessSignatureKey());
-        try {
-            return EventHubClient.createFromConnectionStringSync(connStr.toString());
-        } catch (ServiceBusException | IOException e) {
-            e.printStackTrace();
+        if (ehClient == null) {
+            ConnectionStringBuilder connStr = new ConnectionStringBuilder(
+                    eventHubTemplate.getServiceBusNamespaceName(),
+                    eventHubTemplate.getEventHubName(),
+                    eventHubTemplate.getSharedAccessSignatureKeyName(),
+                    eventHubTemplate.getSharedAccessSignatureKey());
+            try {
+                ehClient = EventHubClient.createFromConnectionStringSync(connStr.toString());
+            } catch (ServiceBusException | IOException e) {
+                logger.error(e);
+            }
         }
-        return null;
+        return ehClient;
     }
 
     static class EventHubPropertyCondition extends AnyNestedCondition {
