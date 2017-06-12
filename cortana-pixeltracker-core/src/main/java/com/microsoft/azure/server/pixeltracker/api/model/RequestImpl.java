@@ -4,6 +4,8 @@
  */
 package com.microsoft.azure.server.pixeltracker.api.model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class RequestImpl implements Request {
-
+    private static Logger logger = LogManager.getLogger();
     private final JSONObject json = new JSONObject();
     private boolean success = true;
     private final Map<String, String> queryParameters;
@@ -41,7 +43,7 @@ public class RequestImpl implements Request {
         try {
             getJson().put(key, value);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
