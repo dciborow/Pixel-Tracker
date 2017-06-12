@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker.api;
 
 import com.microsoft.azure.server.pixeltracker.api.handlers.Handler;
@@ -7,9 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
-/**
- * Created by dcibo on 6/2/2017.
- */
 public class AbstractPixel implements Pixel {
     private static Logger logger = LogManager.getLogger();
     private final Handler handlers;

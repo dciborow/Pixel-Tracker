@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.pixeltracker.server;
 
 import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
@@ -9,10 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-/**
- * Created by dcibo on 6/2/2017.
- */
 
 @SpringBootApplication
 public class Application {

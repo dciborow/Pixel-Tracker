@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.pixeltracker.server.api;
 
 import com.microsoft.azure.server.pixeltracker.api.AbstractPixel;
