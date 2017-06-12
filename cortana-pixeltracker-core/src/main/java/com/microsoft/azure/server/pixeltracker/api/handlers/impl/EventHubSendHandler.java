@@ -1,14 +1,13 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.server.pixeltracker.api.handlers.impl;
 
 import com.microsoft.azure.eventhubs.EventData;
 import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
 import com.microsoft.azure.server.pixeltracker.api.model.Request;
 
-/**
- * Event Hub Handler for Pixel Tracking
- * <p>
- * Created by dcibo on 5/25/2017.
- */
 public class EventHubSendHandler extends AbstractHandler {
 
     private final EventHubAutoConfiguration ehClient;

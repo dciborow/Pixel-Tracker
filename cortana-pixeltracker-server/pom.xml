@@ -10,10 +10,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <name>Microsoft Azure Pixel Tracker Server</name>
     <artifactId>cortana-pixeltracker-server</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -28,7 +26,9 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -38,9 +38,20 @@
     <build>
         <plugins>
             <plugin>
+                <version>1.5.3.RELEASE</version>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.5.3.RELEASE</version>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.microsoft.azure.pixeltracker.server.Application</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -51,14 +62,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-                <version>3.1.0</version>
-            </plugin>
         </plugins>
     </build>
-    
 </project>

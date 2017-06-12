@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved.
+ * Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ */
 package com.microsoft.azure.pixeltracker.server;
 
 import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
@@ -9,10 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-/**
- * Created by dcibo on 6/2/2017.
- */
 
 @SpringBootApplication
 public class Application {
@@ -49,14 +49,10 @@ public class Application {
 
     @Bean
     EventHubTemplate eventHubClientProperties(
-            @Value(value = "#{environment.ServiceBusNamespaceName}") String serviceBusNamespaceName,
-            @Value("#{environment.EventHubName}") String eventHubName,
-            @Value("#{environment.sharedAccessSignatureKeyName}") String sharedAccessSignatureKeyName,
-            @Value("#{environment.SharedAccessSignatureKey}") String sharedAccessSignatureKey) {
-        return new EventHubTemplate()
-                .setEventHubName(eventHubName)
-                .setServiceBusNamespaceName(serviceBusNamespaceName)
-                .setSharedAccessSignatureKey(sharedAccessSignatureKeyName)
-                .setSharedAccessSignatureKey(sharedAccessSignatureKey);
+            @Value(value = "#{environment.EventHubServiceNamespace}") String serviceBusNamespaceName,
+            @Value("#{environment.EventHub}") String eventHubName,
+            @Value("#{environment.EventHubServicePolicy}") String sharedAccessSignatureKeyName,
+            @Value("#{environment.EventHubServiceKey}") String sharedAccessSignatureKey) throws Exception {
+        return new EventHubTemplate(eventHubName, serviceBusNamespaceName, sharedAccessSignatureKeyName, sharedAccessSignatureKey);
     }
 }
