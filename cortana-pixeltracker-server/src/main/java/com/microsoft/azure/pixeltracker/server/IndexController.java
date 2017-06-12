@@ -2,19 +2,19 @@ package com.microsoft.azure.pixeltracker.server;
 
 import com.microsoft.azure.eventhubs.EventHubRuntimeInformation;
 import com.microsoft.azure.eventhubs.spring.EventHubAutoConfiguration;
-import com.microsoft.azure.servicebus.ServiceBusException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by dcibo on 6/2/2017.
  */
 @RestController
 public class IndexController implements Index {
-
+    private static Logger logger = LogManager.getLogger();
     private final EventHubAutoConfiguration ehClient;
 
     @Autowired
@@ -31,6 +31,7 @@ public class IndexController implements Index {
             EventHubRuntimeInformation eventHubRuntimeInformation = runtimeInformation.get();
             eventHubConfig = true;
         } catch (Exception e) {
+            logger.error(e);
             System.out.println("e = " + e);
         }
 

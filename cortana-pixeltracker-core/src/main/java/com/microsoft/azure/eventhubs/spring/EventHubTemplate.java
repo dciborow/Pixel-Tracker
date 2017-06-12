@@ -2,9 +2,6 @@ package com.microsoft.azure.eventhubs.spring;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 /**
  * Created by dcibo on 6/5/2017.
  */

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PixelController extends AbstractPixel {
     @Autowired
-    public PixelController(Handler handlers) {
+    public PixelController(Handler handlers) throws Exception {
         super(handlers);
     }
 }
