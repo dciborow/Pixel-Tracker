@@ -16,3 +16,6 @@
 hs_err_pid*
 /azure-pixeltracker-core/target
 /azure-pixeltracker-server/target
+/cortana-pixeltracker-server/target
+/cortana-pixeltracker-server/dependency-reduced-pom.xml
+/cortana-pixeltracker-core/target/maven-archiver

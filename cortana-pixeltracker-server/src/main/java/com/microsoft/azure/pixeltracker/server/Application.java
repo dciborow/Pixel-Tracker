@@ -49,14 +49,10 @@ public class Application {
 
     @Bean
     EventHubTemplate eventHubClientProperties(
-            @Value(value = "#{environment.ServiceBusNamespaceName}") String serviceBusNamespaceName,
-            @Value("#{environment.EventHubName}") String eventHubName,
-            @Value("#{environment.sharedAccessSignatureKeyName}") String sharedAccessSignatureKeyName,
-            @Value("#{environment.SharedAccessSignatureKey}") String sharedAccessSignatureKey) {
-        return new EventHubTemplate()
-                .setEventHubName(eventHubName)
-                .setServiceBusNamespaceName(serviceBusNamespaceName)
-                .setSharedAccessSignatureKey(sharedAccessSignatureKeyName)
-                .setSharedAccessSignatureKey(sharedAccessSignatureKey);
+            @Value(value = "#{environment.EventHubServiceNamespace}") String serviceBusNamespaceName,
+            @Value("#{environment.EventHub}") String eventHubName,
+            @Value("#{environment.EventHubServicePolicy}") String sharedAccessSignatureKeyName,
+            @Value("#{environment.EventHubServiceKey}") String sharedAccessSignatureKey) throws Exception {
+        return new EventHubTemplate(eventHubName, serviceBusNamespaceName, sharedAccessSignatureKeyName, sharedAccessSignatureKey);
     }
 }

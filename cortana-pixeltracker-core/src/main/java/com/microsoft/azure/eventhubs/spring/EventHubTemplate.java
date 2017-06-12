@@ -2,6 +2,9 @@ package com.microsoft.azure.eventhubs.spring;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by dcibo on 6/5/2017.
  */
@@ -14,6 +17,22 @@ public class EventHubTemplate {
     private String eventHubName;
     private String sharedAccessSignatureKeyName;
     private String sharedAccessSignatureKey;
+
+    public EventHubTemplate(String eventHubName,
+                            String serviceBusNamespaceName,
+                            String sharedAccessSignatureKeyName,
+                            String sharedAccessSignatureKey) throws Exception {
+        if (eventHubName.isEmpty()
+                || serviceBusNamespaceName.isEmpty()
+                || sharedAccessSignatureKeyName.isEmpty()
+                || sharedAccessSignatureKey.isEmpty())
+            throw new Exception("Event Hub Parameters not properly set. Check Configuration");
+
+        this.eventHubName = eventHubName;
+        this.serviceBusNamespaceName = serviceBusNamespaceName;
+        this.sharedAccessSignatureKeyName = sharedAccessSignatureKeyName;
+        this.sharedAccessSignatureKey = sharedAccessSignatureKey;
+    }
 
     public EventHubTemplate setServiceBusNamespaceName(String serviceBusNamespaceName) {
         this.serviceBusNamespaceName = serviceBusNamespaceName;
