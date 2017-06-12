@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import javax.inject.Singleton;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,11 +38,19 @@ class PixelControllerTest {
     }
 
     @Autowired
+    @Singleton
     private MockMvc mvc;
 
     @Test
     void pixel() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/pixel").accept(MediaType.IMAGE_GIF))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    void pixel2() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/pixel?this=that").accept(MediaType.IMAGE_GIF))
                 .andExpect(status().isOk());
 
     }

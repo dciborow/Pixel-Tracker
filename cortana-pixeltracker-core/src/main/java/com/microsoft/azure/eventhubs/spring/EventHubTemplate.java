@@ -15,6 +15,22 @@ public class EventHubTemplate {
     private String sharedAccessSignatureKeyName;
     private String sharedAccessSignatureKey;
 
+    public EventHubTemplate(String eventHubName,
+                            String serviceBusNamespaceName,
+                            String sharedAccessSignatureKeyName,
+                            String sharedAccessSignatureKey) throws Exception {
+        if (eventHubName.isEmpty()
+                || serviceBusNamespaceName.isEmpty()
+                || sharedAccessSignatureKeyName.isEmpty()
+                || sharedAccessSignatureKey.isEmpty())
+            throw new Exception("Event Hub Parameters not properly set. Check Configuration");
+
+        this.eventHubName = eventHubName;
+        this.serviceBusNamespaceName = serviceBusNamespaceName;
+        this.sharedAccessSignatureKeyName = sharedAccessSignatureKeyName;
+        this.sharedAccessSignatureKey = sharedAccessSignatureKey;
+    }
+
     public EventHubTemplate setServiceBusNamespaceName(String serviceBusNamespaceName) {
         this.serviceBusNamespaceName = serviceBusNamespaceName;
         return this;
